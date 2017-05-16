@@ -1,0 +1,21 @@
+#Le fichier docker-compose.yml est un fichier de configuration simple indiquant à docker compose quelle containers construire - docker-compose permet de lancer plusieurs containers ensemble
+version: '2' # Spécifie la version docker-compose
+
+#Défini les services / conteneurs à exécuter
+services:
+  angular: # Nom du premier service
+    build: angular-client # Spécifie le répertoire du fichier Docker
+    ports:
+      - "4200:4200" # Spécifie le port forewarding
+
+  express: #Nom du second service
+    build: express-server # Spécifie le répertoire du fichier Docker
+    ports:
+      - "3000:3000" #Spécifie le port forewarding
+    links:
+      - database # Relier ce service au service de base de données : La propriété "links"" du fichier docker-compose crée une connexion à l'autre service avec le nom du service en tant que nom d'hôte
+
+  database: # Nom du troisième service
+    image: mongo #Spécifie le répertoire du fichier Docker
+    ports:
+      - "27017:27017" # Spécifie le port forewarding
